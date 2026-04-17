@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Deployment
+metadata:
+  name: frontend-deployment
+  namespace: chat-app
+  spec:
+  replicas: 3 
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      name: frontend-pod
+      namespace: chat-app
+      labels:
+        app: frontend
+    spec:
+     containers:
+      - name: frontend-container
+        image: tryhard231/chat-app-frontend:v1
+        ports:
+        - containerPort: 80
+        env:
+        - name: NODE_ENV
+          value: "production"
